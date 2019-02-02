@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordTimeBot", "DiscordTimeBot\DiscordTimeBot.csproj", "{8037156D-0781-4D86-B3AC-36A70F2DA2DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyTime", "TinyTime\TinyTime.csproj", "{EE37C758-DD22-4387-83D3-A70B96B8D893}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Debug|x86.ActiveCfg = Debug|x86
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Debug|x86.Build.0 = Debug|x86
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Release|x86.ActiveCfg = Release|x86
+		{8037156D-0781-4D86-B3AC-36A70F2DA2DF}.Release|x86.Build.0 = Release|x86
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE37C758-DD22-4387-83D3-A70B96B8D893}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
