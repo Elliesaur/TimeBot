@@ -10,3 +10,4 @@ A simple time bot for Discord.
 
 !settime \<query\>
 - The query parameter is a city, town or country.
+- This command will set the timezone of the member who used it.
