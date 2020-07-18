@@ -39,7 +39,7 @@ namespace DiscordTimeBot
 
             _shardedClient = new DiscordShardedClient(cfg);
             _shardedClient.GuildAvailable += ShardedClientOnGuildAvailable;
-
+            
             var ccfg = new CommandsNextConfiguration
             {
                 CaseSensitive = false,

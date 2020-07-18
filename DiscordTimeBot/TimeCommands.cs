@@ -52,7 +52,7 @@ namespace DiscordTimeBot
             if (time == default)
             {
                 await ctx.TriggerTypingAsync();
-                await ctx.RespondAsync($"{ctx.User.Mention} - " + "Sorry, I couldn\'t seem to find the time! :(");
+                await ctx.RespondAsync($"{ctx.User.Mention} -> " + "Sorry, I couldn\'t seem to find the time! :(");
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace DiscordTimeBot
             string t = $"{time.TimeOfDay} on {time.Date}";
 
             await ctx.TriggerTypingAsync();
-            await ctx.RespondAsync($"{ctx.User.Mention} - " + $"Currently it is {t} " + $"in {location}");
+            await ctx.RespondAsync($"{ctx.User.Mention} -> " + $"Currently it is {t} " + $"in {location}");
         }
 
         [Command("settime")]
@@ -74,7 +74,7 @@ namespace DiscordTimeBot
             if (string.IsNullOrEmpty(query))
             {
                 await ctx.TriggerTypingAsync();
-                await ctx.RespondAsync($"{ctx.User.Mention} - " +
+                await ctx.RespondAsync($"{ctx.User.Mention} -> " +
                                        "You need to give me a city to set your time to, silly :P");
                 return;
             }
@@ -88,7 +88,7 @@ namespace DiscordTimeBot
             if (time == default)
             {
                 await ctx.TriggerTypingAsync();
-                await ctx.RespondAsync($"{ctx.User.Mention} -> Can't seem to find that timezone... :/");
+                await ctx.RespondAsync($"{ctx.User.Mention} -> I can't seem to find that timezone... :/");
                 return;
             }
 
@@ -108,6 +108,23 @@ namespace DiscordTimeBot
             await ctx.RespondAsync($"{ctx.User.Mention} -> I set your timezone for you, try !time now.");
         }
 
+        [Command("removetime")]
+        [Description("Removes the time associated with your user in our database. Effectively makes you disappear from our infrastructure.")]
+        public async Task RemoveTime(CommandContext ctx)
+        {
+            var u = ctx.User;
+
+            if (_userTimeDb.Data.Any(x => x.UID == u.Id))
+            {
+                // There's an entry for them in our db.
+                // Remove them from the database and update.
+                _userTimeDb.Data.RemoveAll(x => x.UID == u.Id);
+                _userTimeDb.ToFile();
+
+                await ctx.TriggerTypingAsync();
+                await ctx.RespondAsync($"{ctx.User.Mention} -> I've removed you from the time database.");
+            }
+        }
         #endregion
 
         #region Private Methods
