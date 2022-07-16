@@ -10,7 +10,7 @@ using TinyTime;
 
 namespace DiscordTimeBot
 {
-    public class TimeCommands
+    public class TimeCommands : BaseCommandModule
     {
         #region Fields
 

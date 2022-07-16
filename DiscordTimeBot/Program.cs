@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
+using DSharpPlus.SlashCommands;
+using Microsoft.Extensions.Logging;
 
 namespace DiscordTimeBot
 {
@@ -12,7 +14,7 @@ namespace DiscordTimeBot
     {
         #region Fields
 
-        private IReadOnlyDictionary<int, CommandsNextModule> _commands;
+        //private IReadOnlyDictionary<int, CommandsNextExtension> _commands;
 
         private DiscordShardedClient _shardedClient;
 
@@ -23,8 +25,10 @@ namespace DiscordTimeBot
         public async Task RunBotAsync()
         {
             // To invite to your server:
-            // https://discordapp.com/oauth2/authorize?client_id=522351514266632216&permissions=2048&scope=bot
-
+            // https://discordapp.com/oauth2/authorize?client_id=522351514266632216&permissions=2048&scope=applications.commands%20bot
+            // Additional required commands permission:
+            // https://discordapp.com/oauth2/authorize?client_id=522351514266632216&permissions=2048&scope=applications.commands
+            // Get them to click above.
 
             var cfg = new DiscordConfiguration
             {
@@ -33,26 +37,17 @@ namespace DiscordTimeBot
 
                 AutoReconnect = true,
 
-                LogLevel = LogLevel.Debug,
-                UseInternalLogHandler = true
+                MinimumLogLevel = LogLevel.Debug,
             };
 
             _shardedClient = new DiscordShardedClient(cfg);
             _shardedClient.GuildAvailable += ShardedClientOnGuildAvailable;
-            
-            var ccfg = new CommandsNextConfiguration
-            {
-                CaseSensitive = false,
-                EnableMentionPrefix = true,
-                StringPrefix = "!",
-                EnableDms = true,
-                EnableDefaultHelp = true,
-                IgnoreExtraArguments = false
-            };
 
-            _commands = _shardedClient.UseCommandsNext(ccfg);
-            foreach (KeyValuePair<int, CommandsNextModule> pair in _commands)
-                pair.Value.RegisterCommands<TimeCommands>();
+            var slash = await _shardedClient.UseSlashCommandsAsync();
+            foreach (var pair in slash)
+            {
+                pair.Value.RegisterCommands<TimeSlashCommands>();
+            }
 
             await _shardedClient.StartAsync();
 
@@ -63,9 +58,9 @@ namespace DiscordTimeBot
 
         #region Private Methods
 
-        private Task ShardedClientOnGuildAvailable(GuildCreateEventArgs e)
+        private Task ShardedClientOnGuildAvailable(DiscordClient sender, GuildCreateEventArgs e)
         {
-            e.Client.DebugLogger.LogMessage(LogLevel.Info, typeof(Program).Namespace,
+            sender.Logger.Log(LogLevel.Information, typeof(Program).Namespace,
                                             $"Guild Available: {e.Guild.Name}", DateTime.Now);
             return Task.CompletedTask;
         }
